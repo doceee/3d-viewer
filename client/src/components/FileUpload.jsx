@@ -54,17 +54,19 @@ const FileUpload = () => {
                         />
                     </svg>
                     <div className="input_field flex flex-col w-max mx-auto text-center">
-                        <div v-if="progress" className="progess-bar">
-                            <a
-                                className="text-blue-700 cursor-pointer"
-                                href={`http://localhost:3000/api/models/${fileId}`}
-                                download
-                            >
-                                Download
-                            </a>
-                            <br />
-                            <Link to={`/${fileId}`}>View file</Link>
-                        </div>
+                        {fileId && (
+                            <div className="progess-bar">
+                                <a
+                                    className="text-blue-700 cursor-pointer"
+                                    href={`http://localhost:3000/api/models/${fileId}`}
+                                    download
+                                >
+                                    Download
+                                </a>
+                                <br />
+                                <Link to={`/${fileId}`}>View file</Link>
+                            </div>
+                        )}
                         <p className="text-white">.</p>
                         <label>
                             <input
