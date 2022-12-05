@@ -69,6 +69,7 @@ const FileUpload = () => {
                         <label>
                             <input
                                 type="file"
+                                accept=".stl"
                                 onChange={onFileChange}
                                 className="text-sm cursor-pointer"
                             />

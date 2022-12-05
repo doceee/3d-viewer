@@ -16,6 +16,16 @@ module.exports = {
 
     async show(req, res, next) {
         try {
+            const { fileName } = await Model.findById(req.params.id);
+
+            return res.send(fileName);
+        } catch (err) {
+            return next(err);
+        }
+    },
+
+    async download(req, res, next) {
+        try {
             const { fileName, extension, name } = await Model.findById(
                 req.params.id
             );
