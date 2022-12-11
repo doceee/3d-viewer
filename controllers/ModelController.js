@@ -67,6 +67,12 @@ module.exports = {
 
     async delete(req, res, next) {
         try {
+            const model = await Model.findById(req.params.id);
+
+            if (model) {
+                await promises.unlink(model.path);
+            }
+
             await Model.findByIdAndRemove(req.params.id);
 
             return res.sendStatus(204);

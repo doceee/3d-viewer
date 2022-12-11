@@ -1,15 +1,18 @@
-import React from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import Button from "../components/Button";
 import ListItem from "../components/ListItem";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded";
 
 const Home = () => {
+    const navigate = useNavigate();
+    const [files, setFiles] = useState(null);
+    const [initialFetch, setInitialFetch] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
-    const [fileId, setFileId] = useState("");
 
     const onFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -17,7 +20,6 @@ const Home = () => {
     };
 
     const onUploadFile = async () => {
-        console.log(fileId);
         const formData = new FormData();
         const [name, extension] = selectedFile.name.split(".");
         formData.append("file", selectedFile);
@@ -29,12 +31,51 @@ const Home = () => {
                 "http://localhost:3000/api/models",
                 formData
             );
-            setFileId(data._id);
+            setFiles([...files, data]);
+            setSelectedFile(null);
         } catch (error) {
-            setFileId("");
             console.error(error);
         }
     };
+
+    const deleteFile = async (id) => {
+        try {
+            await axios.delete(`http://localhost:3000/api/models/${id}`);
+
+            const filteredFiles = files.filter((file) => file._id !== id);
+
+            setFiles(filteredFiles);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const downloadFile = async (id) => {
+        try {
+            await axios.get(`http://localhost:3000/api/models/download/${id}`);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchFiles = async () => {
+            try {
+                const { data } = await axios.get(
+                    `http://localhost:3000/api/models`
+                );
+
+                setFiles(data);
+                setInitialFetch(true);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        if (!initialFetch) {
+            fetchFiles();
+        }
+    });
 
     return (
         <>
@@ -58,16 +99,16 @@ const Home = () => {
             </div>
             <div className="flex justify-center flex-col items-center mt-[20px]">
                 <div className="m-2">
-                    <ListItem
-                        onDelete={() => {}}
-                        onView={() => {}}
-                        onDownload={() => {}}
-                    />
-                    <ListItem
-                        onDelete={() => {}}
-                        onView={() => {}}
-                        onDownload={() => {}}
-                    />
+                    {files &&
+                        files.map(({ name, extension, _id }) => (
+                            <ListItem
+                                key={_id}
+                                name={name + "." + extension}
+                                onDelete={() => deleteFile(_id)}
+                                onView={() => navigate(`${_id}`)}
+                                onDownload={() => downloadFile(_id)}
+                            />
+                        ))}
                 </div>
             </div>
         </>

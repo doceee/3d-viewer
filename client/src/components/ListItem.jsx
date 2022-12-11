@@ -1,9 +1,9 @@
 import React from "react";
 
-const ListItem = ({ onView, onDelete, onDownload }) => {
+const ListItem = ({ onView, onDelete, onDownload, name }) => {
     return (
         <div className="w-full w-[600px] flex items-center bg-gray-50 rounded-md my-[3px]">
-            <p className="px-[8px] flex-1">Profile</p>
+            <p className="px-[8px] flex-1">{name}</p>
             <button
                 onClick={() => onView()}
                 type="button"
