@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 import { StlViewer } from "react-stl-viewer";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Button from "../components/Button";
+import axios from "axios";
 
 const Model = () => {
     let { id } = useParams();
     const [url, setUrl] = useState("");
-    // let url =
-    // "https://storage.googleapis.com/ucloud-v3/ccab50f18fb14c91ccca300a.stl";
+    const navigate = useNavigate();
+
     const style = {
         margin: "auto",
         width: "60vw",
@@ -28,19 +28,20 @@ const Model = () => {
             }
         };
 
-        fetchModel(id);
+        if (id) {
+            fetchModel(id);
+        }
     });
 
     return (
-        <div className="w-full h-full flex flex-col">
-            <Link className="text-center" to="/">
-                Go back
-            </Link>
-            <h2 className="w-full text-center font-semibold my-[8px]">
-                Model ID: {id}
-            </h2>
-            <StlViewer style={style} orbitControls shadows url={url} />
-        </div>
+        <>
+            <div className="bg-white w-full bg-whtie m-auto flex justify-center">
+                <div className="px-4 max-w-[900px] w-full flex justify-start py-[6px]">
+                    <Button text="Go back" onClick={() => navigate("/")} />
+                </div>
+            </div>
+            {url && <StlViewer style={style} orbitControls shadows url={url} />}
+        </>
     );
 };
 

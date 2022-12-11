@@ -33,7 +33,7 @@ const FileUpload = () => {
     };
 
     return (
-        <div className="w-full h-full flex justify-items-center items-center">
+        <div className="w-full h-full">
             <div className="p-4 bg-white w-max bg-whtie m-auto rounded-lg">
                 <div
                     className="file_upload p-5 relative border-4 border-dotted border-gray-300 rounded-lg"
