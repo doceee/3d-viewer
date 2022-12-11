@@ -50,14 +50,6 @@ const Home = () => {
         }
     };
 
-    const downloadFile = async (id) => {
-        try {
-            await axios.get(`http://localhost:3000/api/models/download/${id}`);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     useEffect(() => {
         const fetchFiles = async () => {
             try {
@@ -106,7 +98,7 @@ const Home = () => {
                                 name={name + "." + extension}
                                 onDelete={() => deleteFile(_id)}
                                 onView={() => navigate(`${_id}`)}
-                                onDownload={() => downloadFile(_id)}
+                                dlUrl={`http://localhost:3000/api/models/download/${_id}`}
                             />
                         ))}
                 </div>
