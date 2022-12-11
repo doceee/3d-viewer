@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import Button from "../components/Button";
+import ListItem from "../components/ListItem";
 
 axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded";
@@ -55,47 +56,19 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center mt-[20px]">
-                <ul class="bg-white rounded-lg border border-gray-200 w-96 text-gray-900">
-                    <li class="px-6 py-2 border-b border-gray-200 w-full rounded-t-lg">
-                        An item
-                        <div
-                            class="inline-flex rounded-md shadow-sm"
-                            role="group"
-                        >
-                            <button
-                                type="button"
-                                class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-                            >
-                                Profile
-                            </button>
-                            <button
-                                type="button"
-                                class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-                            >
-                                Settings
-                            </button>
-                            <button
-                                type="button"
-                                class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-                            >
-                                Messages
-                            </button>
-                        </div>
-                    </li>
-                    <li class="px-6 py-2 border-b border-gray-200 w-full">
-                        A second item
-                    </li>
-                    <li class="px-6 py-2 border-b border-gray-200 w-full">
-                        A third item
-                    </li>
-                    <li class="px-6 py-2 border-b border-gray-200 w-full">
-                        A fourth item
-                    </li>
-                    <li class="px-6 py-2 w-full rounded-b-lg">
-                        And a fifth one
-                    </li>
-                </ul>
+            <div className="flex justify-center flex-col items-center mt-[20px]">
+                <div className="m-2">
+                    <ListItem
+                        onDelete={() => {}}
+                        onView={() => {}}
+                        onDownload={() => {}}
+                    />
+                    <ListItem
+                        onDelete={() => {}}
+                        onView={() => {}}
+                        onDownload={() => {}}
+                    />
+                </div>
             </div>
         </>
     );
