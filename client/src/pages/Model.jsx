@@ -11,8 +11,9 @@ const Model = () => {
 
     const style = {
         margin: "auto",
-        width: "60vw",
-        height: "500px"
+        width: "100%",
+        height: "100%",
+        maxHeight: "500px"
     };
 
     useEffect(() => {
