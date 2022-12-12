@@ -26,9 +26,9 @@ module.exports = {
 
     async download(req, res, next) {
         try {
-            const { fileName, extension, name } = await Model.findById(
-                req.params.id
-            );
+            const { fileName, extension, name } = await Model.findOne({
+                slug: req.params.id
+            });
 
             const file = `public/${fileName}.${extension}`;
 
@@ -44,6 +44,11 @@ module.exports = {
             const { tempFilePath } = file;
             const [name, extension] = file.name.split(".");
             const fileName = randomBytes(12).toString("hex");
+            let slug = "";
+
+            for (let i = 0; i < 4; i++) {
+                slug += Math.ceil(Math.random() * 9);
+            }
 
             await promises.rename(
                 tempFilePath,
@@ -54,6 +59,7 @@ module.exports = {
                 name,
                 fileName,
                 extension,
+                slug,
                 path: `public/${fileName}.${extension}`
             });
 
