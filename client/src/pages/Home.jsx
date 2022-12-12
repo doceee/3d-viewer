@@ -92,7 +92,7 @@ const Home = () => {
             <div className="flex justify-center flex-col items-center mt-[20px]">
                 <div className="m-2">
                     {files &&
-                        files.map(({ name, extension, _id }) => (
+                        files.map(({ name, extension, _id, slug }) => (
                             <ListItem
                                 key={_id}
                                 name={name + "." + extension}
@@ -102,7 +102,7 @@ const Home = () => {
                                         ? () => navigate(`${_id}`)
                                         : null
                                 }
-                                dlUrl={`http://localhost:3000/api/models/download/${_id}`}
+                                dlUrl={`http://localhost:3000/${slug}`}
                             />
                         ))}
                 </div>
