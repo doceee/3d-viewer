@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useState } from "react";
 import Button from "../components/Button";
@@ -9,6 +9,7 @@ axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded";
 
 const Home = () => {
+    const fileInput = useRef(null);
     const navigate = useNavigate();
     const [files, setFiles] = useState(null);
     const [initialFetch, setInitialFetch] = useState(false);
@@ -33,6 +34,7 @@ const Home = () => {
             );
             setFiles([...files, data]);
             setSelectedFile(null);
+            fileInput.current.value = null;
         } catch (error) {
             console.error(error);
         }
@@ -80,6 +82,7 @@ const Home = () => {
                             disabled={!selectedFile}
                         />
                         <input
+                            ref={fileInput}
                             type="file"
                             className="ml-[4px] text-sm text-grey-500  file:py-[2px] file:px-[4px] file:rounded-md file:border-0 file:bg-gray-200 file:text-sm file:font-medium file:text-gray-700 hover:file:cursor-pointer  hover:file:bg-gray-300  file:bg-white"
                             id="file"
@@ -97,7 +100,11 @@ const Home = () => {
                                 key={_id}
                                 name={name + "." + extension}
                                 onDelete={() => deleteFile(_id)}
-                                onView={() => navigate(`${_id}`)}
+                                onView={
+                                    extension === "stl"
+                                        ? () => navigate(`${_id}`)
+                                        : null
+                                }
                                 dlUrl={`http://localhost:3000/api/models/download/${_id}`}
                             />
                         ))}
