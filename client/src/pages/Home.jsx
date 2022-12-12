@@ -22,10 +22,7 @@ const Home = () => {
 
     const onUploadFile = async () => {
         const formData = new FormData();
-        const [name, extension] = selectedFile.name.split(".");
         formData.append("file", selectedFile);
-        formData.append("name", name);
-        formData.append("extension", extension);
 
         try {
             const { data } = await axios.post(
