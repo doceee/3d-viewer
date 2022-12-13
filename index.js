@@ -16,15 +16,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload({ useTempFiles: true }));
 
 mongoose
-    .connect(
-        `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@0.0.0.0:27017/`,
-        {
-            autoIndex: true,
-            autoCreate: true,
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        }
-    )
+    .connect(`${process.env.MONGO_URL}`, {
+        autoIndex: true,
+        autoCreate: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
     .then(() => {
         console.log("DB connection established successfully.");
     })
@@ -48,6 +45,12 @@ app.use(function (error, req, res, next) {
 
     return res.status(500).send({ error });
 });
+
+app.use(express.static("client/build"));
+
+app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html")).end()
+);
 
 app.listen(process.env.PORT, () => {
     console.info(`Server running on port: ${process.env.PORT}`);
