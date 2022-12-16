@@ -20,10 +20,10 @@ const Model = () => {
         const fetchModel = async (id) => {
             try {
                 const { data } = await axios.get(
-                    `http://localhost:3000/api/models/${id}`
+                    `${process.env.REACT_APP_API_URL}/api/models/${id}`
                 );
 
-                setUrl(`http://localhost:3000/${data}.stl`);
+                setUrl(`${process.env.REACT_APP_API_URL}/${data}.stl`);
             } catch (error) {
                 console.error(error);
             }

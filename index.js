@@ -15,20 +15,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload({ useTempFiles: true }));
 
-mongoose
-    .connect(`${process.env.MONGO_URL}`, {
-        autoIndex: true,
-        autoCreate: true,
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(() => {
-        console.log("DB connection established successfully.");
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
@@ -52,6 +38,19 @@ app.get("*", (req, res) =>
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
 );
 
-app.listen(process.env.PORT, () => {
-    console.info(`Server running on port: ${process.env.PORT}`);
-});
+mongoose
+    .connect(`${process.env.MONGO_URL}`, {
+        autoIndex: true,
+        autoCreate: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => {
+        console.log("DB connection established successfully.");
+        app.listen(process.env.PORT, () => {
+            console.info(`Server running on port: ${process.env.PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+    });

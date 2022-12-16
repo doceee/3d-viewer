@@ -26,7 +26,7 @@ const Home = () => {
 
         try {
             const { data } = await axios.post(
-                "http://localhost:3000/api/models",
+                `${process.env.REACT_APP_API_URL}/api/models`,
                 formData
             );
             setFiles([...files, data]);
@@ -39,7 +39,9 @@ const Home = () => {
 
     const deleteFile = async (id) => {
         try {
-            await axios.delete(`http://localhost:3000/api/models/${id}`);
+            await axios.delete(
+                `${process.env.REACT_APP_API_URL}/api/models/${id}`
+            );
 
             const filteredFiles = files.filter((file) => file._id !== id);
 
@@ -53,7 +55,7 @@ const Home = () => {
         const fetchFiles = async () => {
             try {
                 const { data } = await axios.get(
-                    `http://localhost:3000/api/models`
+                    `${process.env.REACT_APP_API_URL}/api/models`
                 );
 
                 setFiles(data);
@@ -91,20 +93,21 @@ const Home = () => {
             </div>
             <div className="flex justify-center flex-col items-center mt-[20px]">
                 <div className="m-2">
-                    {files &&
-                        files.map(({ name, extension, _id, slug }) => (
-                            <ListItem
-                                key={_id}
-                                name={name + "." + extension}
-                                onDelete={() => deleteFile(_id)}
-                                onView={
-                                    extension === "stl"
-                                        ? () => navigate(`/model/${_id}`)
-                                        : null
-                                }
-                                dlUrl={`http://localhost:3000/api/${slug}`}
-                            />
-                        ))}
+                    {Array.isArray(files) && files.length
+                        ? files.map(({ name, extension, _id, slug }) => (
+                              <ListItem
+                                  key={_id}
+                                  name={name + "." + extension}
+                                  onDelete={() => deleteFile(_id)}
+                                  onView={
+                                      extension === "stl"
+                                          ? () => navigate(`/model/${_id}`)
+                                          : null
+                                  }
+                                  shortId={`${slug}`}
+                              />
+                          ))
+                        : null}
                 </div>
             </div>
         </>
