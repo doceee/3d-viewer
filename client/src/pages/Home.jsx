@@ -99,10 +99,10 @@ const Home = () => {
                                 onDelete={() => deleteFile(_id)}
                                 onView={
                                     extension === "stl"
-                                        ? () => navigate(`${_id}`)
+                                        ? () => navigate(`/model/${_id}`)
                                         : null
                                 }
-                                dlUrl={`/api/${slug}`}
+                                dlUrl={`/${slug}`}
                             />
                         ))}
                 </div>
