@@ -2,9 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { StlViewer } from "react-stl-viewer";
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
-import axios from "axios";
-
-axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
+import axios from "../axios";
 
 const Model = () => {
     let { id } = useParams();

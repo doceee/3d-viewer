@@ -1,13 +1,9 @@
 import { useEffect, useRef } from "react";
-import axios from "axios";
+import axios from "../axios";
 import { useState } from "react";
 import Button from "../components/Button";
 import ListItem from "../components/ListItem";
 import { useNavigate } from "react-router-dom";
-
-axios.defaults.headers.post["Content-Type"] =
-    "application/x-www-form-urlencoded";
-axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
 
 const Home = () => {
     const fileInput = useRef(null);
