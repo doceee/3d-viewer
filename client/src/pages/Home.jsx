@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded";
+axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
 
 const Home = () => {
     const fileInput = useRef(null);
@@ -25,10 +26,7 @@ const Home = () => {
         formData.append("file", selectedFile);
 
         try {
-            const { data } = await axios.post(
-                `${process.env.REACT_APP_API_URL}/api/models`,
-                formData
-            );
+            const { data } = await axios.post(`/api/models`, formData);
             setFiles([...files, data]);
             setSelectedFile(null);
             fileInput.current.value = null;
@@ -39,9 +37,7 @@ const Home = () => {
 
     const deleteFile = async (id) => {
         try {
-            await axios.delete(
-                `${process.env.REACT_APP_API_URL}/api/models/${id}`
-            );
+            await axios.delete(`/api/models/${id}`);
 
             const filteredFiles = files.filter((file) => file._id !== id);
 
@@ -54,9 +50,7 @@ const Home = () => {
     useEffect(() => {
         const fetchFiles = async () => {
             try {
-                const { data } = await axios.get(
-                    `${process.env.REACT_APP_API_URL}/api/models`
-                );
+                const { data } = await axios.get(`/api/models`);
 
                 setFiles(data);
                 setInitialFetch(true);

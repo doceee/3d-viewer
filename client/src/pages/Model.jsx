@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import axios from "axios";
 
+axios.defaults.baseURL = `${process.env.REACT_APP_API_URL}`;
+
 const Model = () => {
     let { id } = useParams();
     const [url, setUrl] = useState("");
@@ -19,11 +21,9 @@ const Model = () => {
     useEffect(() => {
         const fetchModel = async (id) => {
             try {
-                const { data } = await axios.get(
-                    `${process.env.REACT_APP_API_URL}/api/models/${id}`
-                );
+                const { data } = await axios.get(`/api/models/${id}`);
 
-                setUrl(`${process.env.REACT_APP_API_URL}/${data}.stl`);
+                setUrl(`/${data}.stl`);
             } catch (error) {
                 console.error(error);
             }
