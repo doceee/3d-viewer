@@ -2,6 +2,14 @@ const Model = require("../models/Model");
 const { randomBytes } = require("crypto");
 const { promises } = require("fs");
 
+const createDir = async (dir) => {
+    try {
+        await promises.stat(dir);
+    } catch (error) {
+        await promises.mkdir(dir, { recursive: true });
+    }
+};
+
 module.exports = {
     async index(req, res, next) {
         try {
@@ -49,11 +57,13 @@ module.exports = {
             for (let i = 0; i < 4; i++) {
                 slug += Math.ceil(Math.random() * 9);
             }
-
+            console.log("test1");
+            console.log(tempFilePath);
             await promises.rename(
                 tempFilePath,
                 `public/${fileName}.${extension}`
             );
+            console.log("test12");
 
             const newModel = await Model.create({
                 name,
