@@ -102,7 +102,7 @@ const Home = () => {
                                         ? () => navigate(`/model/${_id}`)
                                         : null
                                 }
-                                dlUrl={`/${slug}`}
+                                dlUrl={`http://localhost:3000/api/${slug}`}
                             />
                         ))}
                 </div>
