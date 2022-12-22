@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: `https://long-cyan-cricket-ring.cyclic.app/`,
+    baseURL: `${process.env.REACT_APP_API_URL}`,
     withCredentials: false
 });
-console.log(`https://long-cyan-cricket-ring.cyclic.app/`);
+
 instance.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded";
 

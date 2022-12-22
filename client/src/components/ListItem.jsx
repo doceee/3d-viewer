@@ -21,10 +21,7 @@ const ListItem = ({ onView, onDelete, name, shortId }) => {
                     View
                 </button>
             )}
-            <a
-                href={`${process.env.REACT_APP_API_URL}/api/${shortId}`}
-                download
-            >
+            <a href={`${process.env.REACT_APP_API_URL}api/${shortId}`} download>
                 <button
                     type="button"
                     className="ml-[1px] py-2 px-4 text-sm font-medium text-white bg-gray-700 border-t border-b border-gray-600 hover:bg-gray-600 focus:z-10 focus:ring-2 focus:ring-white"

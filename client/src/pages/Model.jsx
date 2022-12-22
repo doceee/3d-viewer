@@ -21,7 +21,7 @@ const Model = () => {
             try {
                 const { data } = await axios.get(`/api/models/${id}`);
 
-                setUrl(`/${data}.stl`);
+                setUrl(`${process.env.REACT_APP_API_URL}${data}.stl`);
             } catch (error) {
                 console.error(error);
             }

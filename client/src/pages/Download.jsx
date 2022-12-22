@@ -24,7 +24,7 @@ const Download = () => {
                         Go back
                     </p>
                     <a
-                        href={`${process.env.REACT_APP_API_URL}/api/${id}`}
+                        href={`${process.env.REACT_APP_API_URL}api/${id}`}
                         id="aTag"
                         download
                         className="hidden"

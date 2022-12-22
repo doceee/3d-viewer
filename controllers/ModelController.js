@@ -57,13 +57,11 @@ module.exports = {
             for (let i = 0; i < 4; i++) {
                 slug += Math.ceil(Math.random() * 9);
             }
-            console.log("test1");
-            console.log(tempFilePath);
+
             await promises.rename(
                 tempFilePath,
                 `public/${fileName}.${extension}`
             );
-            console.log("test12");
 
             const newModel = await Model.create({
                 name,
@@ -85,11 +83,11 @@ module.exports = {
         try {
             const model = await Model.findById(req.params.id);
 
+            await Model.findByIdAndRemove(req.params.id);
+
             if (model) {
                 await promises.unlink(model.path);
             }
-
-            await Model.findByIdAndRemove(req.params.id);
 
             return res.sendStatus(204);
         } catch (err) {
