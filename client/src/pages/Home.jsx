@@ -82,23 +82,23 @@ const Home = () => {
                 </div>
             </div>
             <div className="flex justify-center flex-col items-center mt-[20px]">
-                <div className="m-2">
-                    {Array.isArray(files) && files.length
-                        ? files.map(({ name, extension, _id, slug }) => (
-                              <ListItem
-                                  key={_id}
-                                  name={name + "." + extension}
-                                  onDelete={() => deleteFile(_id)}
-                                  onView={
-                                      extension === "stl"
-                                          ? () => navigate(`/model/${_id}`)
-                                          : null
-                                  }
-                                  shortId={`${slug}`}
-                              />
-                          ))
-                        : null}
-                </div>
+                {Array.isArray(files) && files.length ? (
+                    <ul className="divide-y bg-white divide-gray-200 rounded-md border border-gray-200 w-full max-w-[900px]">
+                        {files.map(({ name, extension, _id, slug }) => (
+                            <ListItem
+                                key={_id}
+                                name={name + "." + extension}
+                                onDelete={() => deleteFile(_id)}
+                                onView={
+                                    extension === "stl"
+                                        ? () => navigate(`/model/${_id}`)
+                                        : null
+                                }
+                                shortId={`${slug}`}
+                            />
+                        ))}
+                    </ul>
+                ) : null}
             </div>
         </>
     );

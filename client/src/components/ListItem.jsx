@@ -1,42 +1,46 @@
 import { useState } from "react";
+import AttachmentIcon from "./AttachmentIcon";
 
 const ListItem = ({ onView, onDelete, name, shortId }) => {
     const [isName, setName] = useState(false);
     return (
-        <div className="w-full w-[600px] flex items-center bg-gray-50 rounded-md my-[3px]">
-            <p className="px-[8px] flex-1">{`${isName ? shortId : name}`}</p>
-            <button
+        <li className="flex items-center justify-between py-2 px-3 text-sm w-full">
+            <div className="flex w-0 flex-1 items-center">
+                <AttachmentIcon />
+                <span className="ml-2 w-0 flex-1 truncate">
+                    {`${isName ? shortId : name}`}
+                </span>
+            </div>
+            <div
+                className="ml-[12px] cursor-pointer font-medium text-indigo-600 hover:text-indigo-200"
                 onClick={() => setName(!isName)}
-                type="button"
-                className="ml-[1px] py-2 px-4 text-sm font-medium text-white bg-gray-700 border-t border-b border-gray-600 hover:bg-gray-600 focus:z-10 focus:ring-2 focus:ring-white"
             >
                 {`${isName ? "Hide url" : "Show url"}`}
-            </button>
+            </div>
             {onView && (
-                <button
+                <div
+                    className="ml-[12px] cursor-pointer font-medium text-indigo-600 hover:text-indigo-200"
                     onClick={() => onView()}
-                    type="button"
-                    className="ml-[1px] py-2 px-4 text-sm font-medium text-white bg-gray-700 border-t border-b border-gray-600 hover:bg-gray-600 focus:z-10 focus:ring-2 focus:ring-white"
                 >
                     View
-                </button>
+                </div>
             )}
-            <a href={`${process.env.REACT_APP_API_URL}api/${shortId}`} download>
-                <button
-                    type="button"
-                    className="ml-[1px] py-2 px-4 text-sm font-medium text-white bg-gray-700 border-t border-b border-gray-600 hover:bg-gray-600 focus:z-10 focus:ring-2 focus:ring-white"
+            <div className="ml-[12px] cursor-pointer">
+                <a
+                    href={`${process.env.REACT_APP_API_URL}api/${shortId}`}
+                    download
+                    className="font-medium text-indigo-600 hover:text-indigo-200"
                 >
                     Download
-                </button>
-            </a>
-            <button
+                </a>
+            </div>
+            <div
+                className="ml-[12px] cursor-pointer font-medium text-indigo-600 hover:text-indigo-200"
                 onClick={() => onDelete()}
-                type="button"
-                className="ml-[1px] py-2 px-4 text-sm font-medium text-white bg-gray-700 rounded-r-md border border-gray-600 hover:bg-gray-600 focus:z-10 focus:ring-2 focus:ring-white"
             >
                 Delete
-            </button>
-        </div>
+            </div>
+        </li>
     );
 };
 
