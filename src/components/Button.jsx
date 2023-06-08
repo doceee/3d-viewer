@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const Button = ({ text, onClick, disabled }) => {
     return (
@@ -10,7 +10,7 @@ const Button = ({ text, onClick, disabled }) => {
         >
             {text}
         </button>
-    );
-};
+    )
+}
 
-export default Button;
+export default Button

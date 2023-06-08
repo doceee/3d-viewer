@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const Download = () => {
-    let { id } = useParams();
-    const navigate = useNavigate();
+    let { id } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        const aTag = document.getElementById("aTag");
-        aTag.click();
-    });
+        const aTag = document.getElementById('aTag')
+        aTag.click()
+    })
 
     return (
         <>
@@ -19,7 +19,7 @@ const Download = () => {
                     </h4>
                     <p
                         className="text-center cursor-pointer"
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate('/')}
                     >
                         Go back
                     </p>
@@ -34,7 +34,7 @@ const Download = () => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default Download;
+export default Download

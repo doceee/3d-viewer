@@ -1,8 +1,9 @@
-import { Routes, Route } from "react-router-dom";
-import Model from "./pages/Model";
-import Home from "./pages/Home";
-import Layout from "./components/Layout";
-import Download from "./pages/Download";
+import { Routes, Route } from 'react-router-dom'
+
+import Home from './pages/Home'
+import Model from './pages/Model'
+import Download from './pages/Download'
+import Layout from './components/Layout'
 
 const App = () => {
     return (
@@ -13,7 +14,7 @@ const App = () => {
                 <Route path="/:id" element={<Download />} />
             </Route>
         </Routes>
-    );
-};
+    )
+}
 
-export default App;
+export default App
