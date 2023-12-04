@@ -16,7 +16,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="flex max-w-7xl m-auto justify-center flex-col items-center p-[20px]">
+            <div className="flex max-w-2xl m-auto justify-center flex-col items-center p-[20px]">
                 <h3 className="p-[8px] text-start text-lg text-white font-bold w-full">
                     3D Models
                 </h3>
@@ -37,7 +37,7 @@ const Home = () => {
                         ))}
                     </ul>
                 ) : (
-                    <h5>No files found</h5>
+                    <h5 className="text-gray-200">No files found</h5>
                 )}
             </div>
         </>
